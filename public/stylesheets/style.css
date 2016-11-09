@@ -1,0 +1,76 @@
+body {
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+/* NAV BAR CSS */
+#header {
+    margin-bottom: 20px;
+}
+
+ul li {
+    color: green;
+    display: inline-block;
+}
+
+#nav {
+}
+
+.navLinks {
+    text-align: right;
+}
+
+.navLinks a {
+    color: gold;
+    margin-left: 10px;
+    font-family: "Exotc350 Bd BT", sans-serif;
+    font-size: 16px;
+}
+
+.navLinks a:hover {
+    color: white;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+a.selected {
+    color: white;
+}
+
+/* CALENDAR CSS */
+#displayDate {
+    font-size: 24px;
+    color: white;
+    font-family: Calibri;
+    text-align: center;
+}
+
+/*====================
+STYLING PAGE ELEMENTS
+=====================*/
+
+.bgBox {
+    background-color: white;
+    margin: 10px;
+}
+
+#selected, #unselected {
+    height: 100px;
+    background-color: white;
+    border-bottom: 5px solid black;
+}
+
+/*====================
+BOOTSTRAP CSS
+=====================*/
+
+/* Center col in row */
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
