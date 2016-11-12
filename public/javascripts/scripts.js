@@ -10,17 +10,17 @@
 //GraphJS / FusionCharts
 
 $(document).ready(function () {
-    //Get all existing database information
-        //This will be used to pass to chart
-        //
+
+    // Load initial database data (document: username) & passto chartJS chart
     var getData = function () {$.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
         chart(data);
     })};
 
-    var myActivities = {
-        "activity" : ["Exercised", "Watched TV", "Took a Drive", "Worked", "Visited Friends", "Swimming", "Basketball"]
-    };
 
+    var myActivities = ([
+          "Exercised", "Watched TV", "Took a Drive", "Worked", "Visited Friends",
+          "Swimming", "Basketball", "Video Games"
+    ]).sort();
 
     /////////////////////////////////////////////////////////////
     //////*Run the calendar widget and get date from user*//////
@@ -33,7 +33,7 @@ $(document).ready(function () {
     $("#datepicker").click("on", function () {
         $(this).datepicker({
             onSelect: function (date) {
-                $("#displayDate").html("Selected Date: " + date);
+                // $("#showDate").html("Selected Date: " + date);
                 //Global variable to store date
                 selectedDate = date;
             },
@@ -62,14 +62,13 @@ $(document).ready(function () {
     function populateActivities (activities) {
         var $activityHTML = "";
 
-        //for (activity in activities[activity]) {
-        //    $activityHTML += ('<button type="button" class="btn btn-warning">' +
-        //        activities[activity] + '</button>')
-        //}
 
-        for (var i = 0; i < activities.activity.length; i++) {
-                $activityHTML += ('<button type="button" class="btn btn-warning">' +
-                    activities.activity[i] + '</button>')
+        // Cycle through activity array and display to page as bootstrap buttons
+        for (var i = 0; i < activities.length; i++) {
+                var randColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+                $activityHTML +=
+                ('<button type="button" class="btn btn-warning style=" style="color:black;background-color:' + randColor
+                  + '">' + activities[i] + '</button>')
         }
 
         $("#unselected").append($activityHTML);
@@ -201,29 +200,35 @@ $(document).ready(function () {
             });
 
             // If Record date of request doesn't match existing date, post to database. Otherwise, use put request to update
+            console.log(isMatch);
+
             if (!isMatch) {post();} else {put(idMatch);}
-        }).done(function (data) {
-            console.log("$.get Data Loaded", data);
         });
 
 
         //Sends a post request to app.post code in server.js
         function post() {
-            $.post("http://localhost:3000/db",{
-                date: sendInfo.date,
-                activities: JSON.stringify(sendInfo.activities),
-                survey: JSON.stringify(surveyArray)},
-                function(data){
-                    if(data==='done')
-                    {
-                        alert("login success");
-                    } else {
-                        console.log(data);
-                    }
-            }).done(function (data) {
-                console.log("$.post Data Loaded", data);
-                getData()
-            });
+            var posting =
+              $.ajax({
+                url: "/db",
+                crossOrigin: true,
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    date: sendInfo.date,
+                    activities: JSON.stringify(sendInfo.activities),
+                    survey: JSON.stringify(sendInfo.survey)}
+              }).always(function (data) {
+                  console.log(data);
+              });
+
+              // posting.done(function (data) {
+              //     alert("Done Received");
+              // })
+              //
+              // posting.always(function (data) {
+              //     alert("Always Fired");
+              // })
         }
 
         // Updates selected existing record, accessed via id (idMatch)
@@ -231,7 +236,7 @@ $(document).ready(function () {
             console.log("Duplicate Date at id: " + idMatch);
 
             jQuery.get("/db/" + idMatch, function(data, textStatus, jqXHR) {
-            console.log("Get resposne:");
+            console.log("Get response:");
             // console.dir(data);
             // console.log(textStatus);
             // console.dir(jqXHR);
@@ -247,11 +252,12 @@ $(document).ready(function () {
                         survey: JSON.stringify(sendInfo.survey)
                     },
                     success: function (data, textStatus, jqXHR) {
+                      getData();
                     }
                 });
+            }).done(function (data) {
+                console.log("put date loaded");
             });
-
-
         }
 
         // Reload chart after POSTING/PUTTING NEW RECORD
@@ -282,7 +288,6 @@ $(document).ready(function () {
         console.log(surveyArray);
         //Add user input (Date, Activities, and Surveys to Mongo Document)
         addNewDay(selectedDate, activities, surveyArray);
-        getData();
     });
 
 

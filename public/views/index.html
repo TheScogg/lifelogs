@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SelfSentinel</title>
+    <title>Welcome to lifeLogs!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,7 +20,6 @@
                 <!--<div id="introText">Introduction Text Goes Here...Something Catchy.</div>-->
                 <ul class="navLinks">
                     <li><a href="index.html" class="selected">Home</a></li>
-                    <li><a href="about.html">About</a></li>
                     <li><a href="contactUs.html">Contact Us</a></li>
                     <li><a href="next.html">What's Next?</a></li>
                     <li><a href="/logout">Log Out</a></li>
@@ -32,12 +31,10 @@
 
     <div id="setDate" class="container-fluid">
          <div class="row row-centered">
-             <div class="col-md-4">
+             <div class="col-md-4 col-centered">
+               <span id="showDate">Select Date : </span>
+
                  <input type="text" id="datepicker">
-                 <span id="showDate"></span>
-             </div>
-             <div class="col-md-4" id="displayDate">
-                <!-- Selected Date is Inserted Here -->
              </div>
          </div>
     </div>
@@ -57,27 +54,32 @@
         <div class="row row-centered">
             <div class="col-md-8 bgBox col-centered">
                 <div id="surveys">
-                    <label for="physical">Physical</label>
+                    <label for="physical" class="surveyBox">Physical</label>
                     <select name="physical" id="physical">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
 
-                    <label for="mental">Mental</label>
+                    <label for="mental" class="surveyBox">Mental</label>
                     <select name="mental" id="mental">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
 
-                    <label for="psychological">Psychological</label>
+                    <label for="psychological" class="surveyBox">Psychological</label>
                     <select name="psychological" id="psychological">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
+
+                    <input type="submit" value="Click to Submit" id="submit" class="btn btn-warning pull-right">
+
+
                 </div>
             </div>
         </div>
     </div>
+
 
     <div id="chart" class="container-fluid">
         <div class="row">
@@ -88,17 +90,7 @@
         </div>
     </div>
 
-    <div id="submitButton">
-        <div id="row">
-            <div class="col-md-12">
-                <form>
-                    <input type="submit" value="Click to Submit" id="submit">
-                    <input type="submit" value="DEBUG" id="debugSubmit">
 
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!--<script src="../public/javascripts/database.js"></script>-->
     <script src="../javascripts/scripts.js"></script>

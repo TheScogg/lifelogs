@@ -15,8 +15,6 @@ ul li {
     display: inline-block;
 }
 
-#nav {
-}
 
 .navLinks {
     text-align: right;
@@ -43,10 +41,10 @@ a.selected {
 }
 
 /* CALENDAR CSS */
-#displayDate {
+#showDate {
     font-size: 24px;
     color: white;
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     text-align: center;
 }
 
@@ -60,9 +58,32 @@ STYLING PAGE ELEMENTS
 }
 
 #selected, #unselected {
-    height: 100px;
+    min-height: 100px;
     background-color: white;
     border-bottom: 5px solid black;
+}
+
+.bgBox > span {
+    display: block;
+    font-family: "Exotc350 Bd BT", sans-serif;
+}
+
+#submit {
+    text-align: right;
+    margin-left: 50px;
+}
+
+#surveys {
+    padding: 10px 0px;
+    margin-bottom: 40px;
+}
+
+.surveyBox {
+    display: inline-block;
+}
+
+button {
+    display: inline-block;
 }
 
 /*====================
