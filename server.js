@@ -151,35 +151,33 @@ app.get('/api/user_data', function(req, res) {
 
 /* CODE STOLEN FROM https://pixelhandler.com/posts/develop-a-restful-api-using-nodejs-with-express-and-mongoose */
 // Display MongoDB JSON data for user
+var DayModel = mongoose.model(req.user.username, database.DaySchema);
 
 
 // Post data to MongoDB database
 app.post('/db', function (req, res){
-    var DayModel = mongoose.model(req.user.username, database.DaySchema);
-
     console.log(req.body.activities);
     var day;
 
     day = new DayModel({
         date: req.body.date,
-        activities: JSON.parse(req.body.activities),
-        survey: JSON.parse(req.body.survey)
+        activities: (req.body.activities),
+        survey: (req.body.survey)
     });
-    day.save(function (err) {
+    return day.save(function (err) {
         if (!err) {
             return console.log("created");
         } else {
             return console.log(err);
         }
     });
-    return res.send(day);
+    // return res.send(day);
 });
 
 
 
 // Read a single day's data by ID
 app.get('/db/:id', function (req, res){
-    var DayModel = mongoose.model(req.user.username, database.DaySchema);
     return DayModel.findById(req.params.id, function (err, day) {
         if (!err) {
             return res.send(day);
@@ -191,7 +189,6 @@ app.get('/db/:id', function (req, res){
 
 // Update a single day's data by ID
 app.put('/db/:id', function (req, res){
-    var DayModel = mongoose.model(req.user.username, database.DaySchema);
     return DayModel.findById(req.params.id, function (err, day) {
         console.log(req.body.activities);
         day.date = req.body.date;

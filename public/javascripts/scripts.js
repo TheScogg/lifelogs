@@ -208,41 +208,30 @@ $(document).ready(function () {
 
         //Sends a post request to app.post code in server.js
         function post() {
-            var posting =
-              $.ajax({
-                url: "/db",
-                crossOrigin: true,
-                type: "POST",
-                dataType: 'json',
-                data: {
-                    date: sendInfo.date,
-                    activities: JSON.stringify(sendInfo.activities),
-                    survey: JSON.stringify(sendInfo.survey)}
-              }).always(function (data) {
-                  console.log(data);
-              });
+            /* Need to fix, somehow. POST sends data to database, but POST request keeps running background until
+            timeout or page is refreshed. */
+            var posting = $.ajax({
+              url: "http://localhost:3000/db/",
+              // async: false,
+              crossOrigin: true,
+              type: "POST",
+              dataType: 'application/json',
+              // Hack around POST request not ending. Kills request after 3 seconds.
+              timeout: 3000,
+              data: {
+                  date: sendInfo.date,
+                  activities: JSON.stringify(sendInfo.activities),
+                  survey: JSON.stringify(sendInfo.survey)}
+            }).always(function (data,textStatus,jqXHR) {
+                console.log(data,textStatus,jqXHR);
+            });
 
-              // posting.done(function (data) {
-              //     alert("Done Received");
-              // })
-              //
-              // posting.always(function (data) {
-              //     alert("Always Fired");
-              // })
+            getData();
         }
 
-        // Updates selected existing record, accessed via id (idMatch)
+        /* Updates selected existing record, accessed via id (idMatch).
+        Weirdly, I don't have same issue as POST request, despite nearly identical code... */
         function put(idMatch) {
-            console.log("Duplicate Date at id: " + idMatch);
-
-            jQuery.get("/db/" + idMatch, function(data, textStatus, jqXHR) {
-            console.log("Get response:");
-            // console.dir(data);
-            // console.log(textStatus);
-            // console.dir(jqXHR);
-            }).done(function (data) {
-                console.log("==========================================")
-                console.log(sendInfo.activities);
                 jQuery.ajax({
                     url: "/db/" + idMatch,
                     type: "PUT",
@@ -252,12 +241,11 @@ $(document).ready(function () {
                         survey: JSON.stringify(sendInfo.survey)
                     },
                     success: function (data, textStatus, jqXHR) {
+                      console.log(data);
                       getData();
                     }
                 });
-            }).done(function (data) {
-                console.log("put date loaded");
-            });
+
         }
 
         // Reload chart after POSTING/PUTTING NEW RECORD
