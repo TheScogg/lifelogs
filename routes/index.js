@@ -63,10 +63,9 @@ router.get('/db', function (req, res){
 
 // Post data to MongoDB database
 router.post('/db', function (req, res){
-    var boys = (req.user.username.toLowerCase());
-    console.log(boys);
+    var username = (req.user.username.toLowerCase());
 
-    var DayModel = mongoose.model(boys, database.DaySchema);
+    var DayModel = mongoose.model(username, database.DaySchema);
 
     var day = new DayModel({
         date: req.body.date,
@@ -74,12 +73,13 @@ router.post('/db', function (req, res){
         survey: JSON.parse(req.body.survey)
     });
 
-    day.save(function (err) {
+    return day.save(function (err) {
         if (!err) {
-            return console.log("created");
+            console.log("updated");
         } else {
-            return console.log(err);
+            console.log(err);
         }
+        return res.send(day);
     });
     // return res.send(day);
 });

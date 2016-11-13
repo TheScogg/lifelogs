@@ -188,6 +188,10 @@ $(document).ready(function () {
             "survey": surveyArray
         };
 
+        console.log( sendInfo.date);
+        console.log( sendInfo.activities);
+        console.log( sendInfo.survey);
+
         // Get all existing database records, and search for date match
         $.get("/db/", function(data, textStatus, jqXHR) {
             var isMatch = false;
@@ -206,24 +210,21 @@ $(document).ready(function () {
         });
 
 
-        //Sends a post request to app.post code in server.js
+        //Sends a post request to app.post code in routes/index.js
         function post() {
-            /* Need to fix, somehow. POST sends data to database, but POST request keeps running background until
-            timeout or page is refreshed. */
             var posting = $.ajax({
               url: "http://localhost:3000/db/",
               // async: false,
               crossOrigin: true,
               type: "POST",
               dataType: 'application/json',
-              // Hack around POST request not ending. Kills request after 3 seconds.
-              timeout: 3000,
               data: {
                   date: sendInfo.date,
                   activities: JSON.stringify(sendInfo.activities),
                   survey: JSON.stringify(sendInfo.survey)}
             }).always(function (data,textStatus,jqXHR) {
                 console.log(data,textStatus,jqXHR);
+                console.log("SUCCESSFUL POSTING?");
             });
 
             getData();
