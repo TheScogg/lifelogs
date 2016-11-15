@@ -5,6 +5,8 @@ var router = express.Router();
 var database = require('../models/database');
 var mongoose = require('mongoose');
 
+
+
 router.get('/', function (req, res) {
     // console.log(req.user);
     res.render('index', { user : req.user });

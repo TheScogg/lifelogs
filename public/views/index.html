@@ -12,8 +12,10 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+
 </head>
-<body>
+<body ng-app="root">
     <div id="header" class="container-fluid">
         <div id="row">
             <div id="nav" class="col-md-8 col-centered">
@@ -32,8 +34,8 @@
     <div id="setDate" class="container-fluid">
          <div class="row row-centered">
              <div class="col-md-4 col-centered">
-               <span id="showDate">Select Date : </span>
-
+               <div ng-controller="index">{{message}}</div>
+                  <span id="showDate">Select Date : </span>
                  <input type="text" id="datepicker">
              </div>
          </div>

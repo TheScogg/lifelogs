@@ -10,6 +10,7 @@
 //GraphJS / FusionCharts
 
 $(document).ready(function () {
+    // var app = angular.module("myApp", []);
 
     // Load initial database data (document: username) & passto chartJS chart
     var getData = function () {$.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
@@ -29,6 +30,46 @@ $(document).ready(function () {
     var selectedDate = ("0" + today.getMonth()).slice(-2) + "/" + ("0" + today.getDate()).slice(-2)
                             + "/" + today.getFullYear();
 
+    /* Allow user to view & modify activities selected on other days */
+    function loadDate (selectedDate) {
+
+        // Get all db data, then search for specific selected day.
+        $.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
+            var activities = [];
+            var deleteActivities = [];
+            var unselected = [];
+            // Search through data to find existing activities for selected date
+            for (date in data) {
+                console.log(data[date]);
+                if (data[date].date === selectedDate) {
+                    activities = data[date].activities;
+                }
+            }
+
+            // Clear out visible activities in #selected and populate with activities for chosen date
+            $("#selected").html('');
+            populateActivities(activities, "#selected");
+            unselectedMinusSelected();
+
+            // Delete items in top row (unselected) that are in bottom row (selected).
+            function unselectedMinusSelected (){
+                unselected.push($("#unselected").children("button").text());
+                // Top Row : nnselected / Bottom Row: activities
+                console.log(unselected, activities);
+                // Iterate through top row
+                for (items in unselected) {
+                    // Run each/foreach function on bottom row items
+                    $.each(activities, function (index,val) {
+                        // val is selected activities to be deleted from unselected
+                        console.log(val);
+                        $("#unselected":contains())
+                    })
+                }
+            }
+        });
+
+    }
+
     $("#datepicker").attr("value", selectedDate);
     $("#datepicker").click("on", function () {
         $(this).datepicker({
@@ -36,6 +77,7 @@ $(document).ready(function () {
                 // $("#showDate").html("Selected Date: " + date);
                 //Global variable to store date
                 selectedDate = date;
+                loadDate(selectedDate);
             },
             selectWeek: true,
             inline: true,
@@ -43,6 +85,8 @@ $(document).ready(function () {
             firstDay: 1,
             setDate: '7/11/2016'
         }).datepicker("show");
+
+        // alert(selectedDate);
     });
 
     /////////////////////////////////////////////////////////////
@@ -52,14 +96,8 @@ $(document).ready(function () {
     $( "#mental" ).selectmenu({width:70});
     $( "#psychological" ).selectmenu({width:70});
 
-
-    //Color activity buttons
-    function colorActivities() {
-
-    }
-
     //Add activity buttons to #activities from activities array
-    function populateActivities (activities) {
+    function populateActivities (activities, div) {
         var $activityHTML = "";
 
 
@@ -71,7 +109,7 @@ $(document).ready(function () {
                   + '">' + activities[i] + '</button>')
         }
 
-        $("#unselected").append($activityHTML);
+        $(div).append($activityHTML);
     }
 
     /* Sorting database data by date, and conveying to ChartsJS */
@@ -177,7 +215,7 @@ $(document).ready(function () {
 
 
     getData();
-    populateActivities(myActivities);
+    populateActivities(myActivities, "#unselected");
 
 
     function addNewDay(date, activities, surveyArray) {
@@ -246,10 +284,7 @@ $(document).ready(function () {
                       getData();
                     }
                 });
-
         }
-
-        // Reload chart after POSTING/PUTTING NEW RECORD
     }
 
     /* CLICK EVENTS */
@@ -274,14 +309,13 @@ $(document).ready(function () {
             surveyArray.push($(this).children().text());
         });
 
-        console.log(surveyArray);
         //Add user input (Date, Activities, and Surveys to Mongo Document)
         addNewDay(selectedDate, activities, surveyArray);
     });
 
 
     //When button in #activity div, move to other subDiv    #unselected <---> #selected
-    $("#activities button").click('on', function () {
+    $(document).on('click', "#activities button", function () {
         $(this).parent().siblings().append(this);
     });
 
