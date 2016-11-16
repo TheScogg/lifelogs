@@ -35,42 +35,38 @@ $(document).ready(function () {
 
         // Get all db data, then search for specific selected day.
         $.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
-            var activities = [];
-            var deleteActivities = [];
-            var unselected = [];
+            var unselectedActivities = [];
+            var selectedActivities = [];
             // Search through data to find existing activities for selected date
             for (date in data) {
                 console.log(data[date]);
                 if (data[date].date === selectedDate) {
-                    activities = data[date].activities;
+                    selectedActivities = data[date].activities;
                 }
             }
 
-            // Clear out visible activities in #selected and populate with activities for chosen date
+
+            // Clear out visible activities in #selected & #unselected, clean slate!
+            $("#unselected").html('');
             $("#selected").html('');
-            populateActivities(activities, "#selected");
+
+            // populateActivities(activities, "#selected");
             unselectedMinusSelected();
 
-            // Delete items in top row (unselected) that are in bottom row (selected).
+            // Prevents duplicate activities in top & bottom (unselected & selected) rows
             function unselectedMinusSelected (){
-                unselected.push($("#unselected").children("button").text());
-                // Top Row : nnselected / Bottom Row: activities
-                console.log(unselected, activities);
-                // Iterate through top row
-                for (items in unselected) {
-                    // Run each/foreach function on bottom row items
-                    $.each(activities, function (index,val) {
-                        // val is selected activities to be deleted from unselected
-                        console.log(val);
-                        $("#unselected":contains())
-                    })
-                }
+                //Cross references un(selected) activities and filters duplicates
+                unselectedActivities = myActivities.filter(function (val) {
+                    return selectedActivities.indexOf(val) == -1;
+                })
+                populateActivities(unselectedActivities, "#unselected");
+                populateActivities(selectedActivities, "#selected");
             }
         });
 
     }
 
-    $("#datepicker").attr("value", selectedDate);
+    $("#datepicker").attr("value", new Date());
     $("#datepicker").click("on", function () {
         $(this).datepicker({
             onSelect: function (date) {
@@ -83,7 +79,7 @@ $(document).ready(function () {
             inline: true,
             startDate: '01/01/2000',
             firstDay: 1,
-            setDate: '7/11/2016'
+            setDate: new Date()
         }).datepicker("show");
 
         // alert(selectedDate);
