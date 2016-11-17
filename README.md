@@ -1,6 +1,10 @@
 # lifelogs
 A tool to help you keep track of what you do and how you feel.
 
+HOWTO:
+
+Start server with "node ./bin/www"
+
 Please begin by registering for an account and logging in.
 
 Proceed to lifelogs...

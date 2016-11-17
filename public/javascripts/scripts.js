@@ -1,14 +1,4 @@
-/**
- * Created by thesc on 9/29/2016.
- */
-
-//mongoose = require('mongoose');
-
-//IMPORTANT NOTES FOR LATER
-/* Date : {selectedDate} Global Variable */
-
-//GraphJS / FusionCharts
-
+//Loads HTML, CSS, etc. before proceeding with Javascript
 $(document).ready(function () {
     // Load initial database data (document: username) & passto chartJS chart
     var getData = function () {$.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
@@ -18,7 +8,8 @@ $(document).ready(function () {
 
     var myActivities = ([
           "Exercised", "Watched TV", "Took a Drive", "Worked", "Visited Friends",
-          "Swimming", "Basketball", "Video Games"
+          "Swimming", "Basketball", "Video Games", "Studied", "Coded", "Fished / Hunted",
+          "Board Games"
     ]).sort();
 
     /////////////////////////////////////////////////////////////
@@ -36,12 +27,20 @@ $(document).ready(function () {
         $.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
             var unselectedActivities = [];
             var selectedActivities = [];
+            var selectedSurvey = [];
             // Search through data to find existing activities for selected date
             for (date in data) {
+                //Debug : Make sure I'm pulling the correct info
                 console.log(data[date]);
+                console.log(data[date].survey);
+
+                // If matching date is found, append to selectedActivities var
                 if (data[date].date === selectedDate) {
                     selectedActivities = data[date].activities;
+                    selectedSurvey = data[date].survey;
                 }
+
+
             }
 
 
@@ -200,7 +199,7 @@ $(document).ready(function () {
                     label: 'Psychological',
                     data: getSurvey(data, 2),
                     backgroundColor: "rgba(66,244,69,0.4)"
-                }]
+                  }]
             },
             options: {
                 title: {
@@ -225,7 +224,7 @@ $(document).ready(function () {
     populateActivities(myActivities, "#unselected");
 
 
-
+    //Add new day (date, activities, survey) to database
     function addNewDay(date, activities, surveyArray) {
         console.log(activities);
         var sendInfo = {
@@ -298,9 +297,8 @@ $(document).ready(function () {
     /* CLICK EVENTS */
     //Home Page Click Events
 
-//Retrieve Survey Scores. Any way to refactory, instead of running this for all 3 values?
-//        $("#physical-button > span.ui-selectmenu-text").text();
-
+    /*On Submit button click, collect selected activities & survey scores, and push
+    to addNewDay function, which will perform POST */
     $("#submit").click('on', function (e) {
         var activities = [];
         var surveyArray = [];

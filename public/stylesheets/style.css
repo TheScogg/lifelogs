@@ -29,7 +29,7 @@ ul li {
 .navLinks a {
     color: gold;
     margin-left: 10px;
-    font-family: "Exotc350 Bd BT", sans-serif;
+    font-family: 'Dosis', sans-serif;
     font-size: 16px;
 }
 
@@ -50,13 +50,16 @@ a.selected {
 #showDate {
     font-size: 24px;
     color: white;
-    font-family: Calibri, sans-serif;
+    font-family: 'Dosis', sans-serif;
     text-align: center;
 }
 
 /*====================
 STYLING PAGE ELEMENTS
 =====================*/
+#setDate {
+    margin-bottom: 10px;
+}
 
 .bgBox {
     background-color: white;
@@ -71,7 +74,7 @@ STYLING PAGE ELEMENTS
 
 .bgBox > span {
     display: block;
-    font-family: "Exotc350 Bd BT", sans-serif;
+    font-family: 'Dosis', sans-serif;
 }
 
 #submit {
@@ -96,6 +99,29 @@ button {
     white-space: pre-line;
 }
 
+#surveyInfo {
+    text-align: justify;
+}
+
+#surveyTitle {
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    padding-top: 10px;
+}
+
+#unselected span, #selected span {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.btn {
+    margin: 0 10px 10px 0;
+}
+
+p {
+    color: white;
+}
 /*====================
 BOOTSTRAP CSS
 =====================*/

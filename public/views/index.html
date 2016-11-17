@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:600" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -52,15 +53,25 @@
     <div id="survey" class="container-fluid">
         <div class="row row-centered">
             <div class="col-md-8 bgBox col-centered">
+                <div id="surveyInfo">
+                    <h1 id="surveyTitle">Please rate your state of wellbeing in the following metrics:</h1>
+                    <span><b>Mental</b>: Think about how your 'head' feels.
+                    Think about how well your brain is working. Are you sharp as a tack today?
+                    Is your short term memory working especially well? Have you been in a fog?</span><br>
+                    <span><b>Physical</b>: How your body feels. Does your knee hurt? Did you jump out of bed
+                    feeling like a spring chicken today?</span><br>
+                    <span><b>Psychological</b>: Think about how your 'heart' feels. Are you happy?
+                    Are you sad? Do you feel like jumping for joy or crawling into a corner?</span>
+                </div>
                 <div id="surveys">
-                    <label for="physical" class="surveyBox">Physical</label>
-                    <select name="physical" id="physical">
+                    <label for="mental" class="surveyBox">Mental</label>
+                    <select name="mental" id="mental">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
 
-                    <label for="mental" class="surveyBox">Mental</label>
-                    <select name="mental" id="mental">
+                    <label for="physical" class="surveyBox">Physical</label>
+                    <select name="physical" id="physical">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
