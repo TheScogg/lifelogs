@@ -10,8 +10,6 @@
 //GraphJS / FusionCharts
 
 $(document).ready(function () {
-    // var app = angular.module("myApp", []);
-
     // Load initial database data (document: username) & passto chartJS chart
     var getData = function () {$.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
         chart(data);
@@ -27,12 +25,13 @@ $(document).ready(function () {
     //////*Run the calendar widget and get date from user*//////
     var today = new Date();
     //Defaults to today's date by creating date object and assigning to value attribute of #datepicker div
-    var selectedDate = ("0" + today.getMonth()).slice(-2) + "/" + ("0" + today.getDate()).slice(-2)
+    var selectedDate = ("0" + (today.getMonth() + 1)).slice(-2) + "/" + ("0" + today.getDate()).slice(-2)
                             + "/" + today.getFullYear();
+
+                            console.log(selectedDate);
 
     /* Allow user to view & modify activities selected on other days */
     function loadDate (selectedDate) {
-
         // Get all db data, then search for specific selected day.
         $.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
             var unselectedActivities = [];
@@ -66,7 +65,7 @@ $(document).ready(function () {
 
     }
 
-    $("#datepicker").attr("value", new Date());
+    $("#datepicker").attr("value", selectedDate);
     $("#datepicker").click("on", function () {
         $(this).datepicker({
             onSelect: function (date) {
@@ -96,6 +95,18 @@ $(document).ready(function () {
     function populateActivities (activities, div) {
         var $activityHTML = "";
 
+        //Populates introductory text above #unselected & #selected based on which div is being filled with activities
+        if (div === "#unselected") {
+            $activityHTML += "<span>Please select at least 5 acitivities that you performed today:</span>"
+        } else if (div === "#selected") {
+          $activityHTML += "<span>Selected Activities:</span>"
+        }
+
+        if ($("#selected").text() == 'Selected Activities') {
+            this.append("<span>Selected Activities</span");
+        }
+
+        console.log($("#selected").text());
 
         // Cycle through activity array and display to page as bootstrap buttons
         for (var i = 0; i < activities.length; i++) {
@@ -209,9 +220,10 @@ $(document).ready(function () {
     }
 
 
-
+    // Initial GET request for user database & loading of activity buttons
     getData();
     populateActivities(myActivities, "#unselected");
+
 
 
     function addNewDay(date, activities, surveyArray) {

@@ -21,7 +21,9 @@ ul li {
 
 
 .navLinks {
-    text-align: right;
+    text-align: center;
+    padding: 0px;
+    font-size: 20px;
 }
 
 .navLinks a {
@@ -90,6 +92,10 @@ button {
     display: inline-block;
 }
 
+#readmeText {
+    white-space: pre-line;
+}
+
 /*====================
 BOOTSTRAP CSS
 =====================*/
@@ -98,4 +104,14 @@ BOOTSTRAP CSS
 .col-centered{
     float: none;
     margin: 0 auto;
+    text-align:center;
+}
+
+/*====================
+MEDIA QUERIES
+=====================*/
+@media only screen and (max-width: 500px) {
+  .navLinks {
+      text-align: center;
+  }
 }
