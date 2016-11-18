@@ -123,6 +123,11 @@ p {
     color: white;
 }
 
+#logoText {
+    color: gold;
+    font-size: 60px;
+    font-family: 'Quicksand', sans-serif;
+}
 /*====================
 CONTACT PAGE
 =====================*/
