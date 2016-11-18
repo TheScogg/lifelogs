@@ -39,10 +39,15 @@ $(document).ready(function () {
                     selectedActivities = data[date].activities;
                     selectedSurvey = data[date].survey;
                 }
-
-
             }
 
+            // Set survey values according to existing survey data for given date
+            $('#mental').val(selectedSurvey[0]);
+            $("#mental").selectmenu("refresh");
+            $('#physical').val(selectedSurvey[1]);
+            $("#physical").selectmenu("refresh");
+            $('#psychological').val(selectedSurvey[2]);
+            $("#psychological").selectmenu("refresh");
 
             // Clear out visible activities in #selected & #unselected, clean slate!
             $("#unselected").html('');
