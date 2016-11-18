@@ -3,6 +3,7 @@ $(document).ready(function () {
     // Load initial database data (document: username) & passto chartJS chart
     var getData = function () {$.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
         chart(data);
+        chart2(data);
     })};
 
 
@@ -179,6 +180,29 @@ $(document).ready(function () {
         return survey;
     }
 
+    function getHappiness(data,index) {
+      var scoreArray = [];
+      var counter = 0;
+      var score = 0;
+        for (items in myActivities) {
+            for (date in data) {
+                if ((data[date].activities).indexOf(myActivities[items]) != -1) {
+                    counter += 1;
+                    score += parseInt(data[date].survey[index]);
+                    console.log(data[date].survey[index])
+                } else {console.log("N/A")}
+            }
+            console.log(myActivities[items], score, counter, score/counter);
+            scoreArray.push(parseInt(score/counter));
+            counter = 0;
+            score = 0;
+        }
+
+        console.log(scoreArray);
+        return (scoreArray)
+    }
+
+
     //Draw Chart with data from myDay object
     function chart (data) {
         //chartJS : http://www.chartjs.org/docs/#line-chart
@@ -218,6 +242,45 @@ $(document).ready(function () {
                             return labelData.datasets[tooltipItems.datasetIndex].label + '\n' + ': ' + tooltipItems.yLabel + "  (" + activities[tooltipItems.index].join(',\n ') + ")";
                         }
                     }
+                }
+            }
+        });
+    }
+
+
+    function chart2 (data) {
+        //chartJS : http://www.chartjs.org/docs/#line-chart
+        var activities = getActivities(data);
+
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: myActivities,
+                //Object.keys(myDay)
+                datasets: [{
+                    label: 'Mental',
+                    data: getHappiness(data, 0),
+                    // data: getChartData(myDay, 0),
+                    backgroundColor: "rgba(51,51,51,0.4)"
+                }, {
+                    label: 'Physical',
+                    data: getHappiness(data, 1),
+                    backgroundColor: "rgba(244,235,66,0.4)"
+                },
+                    {
+                    label: 'Psychological',
+                    data: getHappiness(data, 2),
+                    backgroundColor: "rgba(66,244,69,0.4)"
+                  }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Average Happiness By Activity'
+                },
+                tooltips: {
+
                 }
             }
         });
