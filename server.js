@@ -11,7 +11,7 @@ var io =  require('socket.io')();
 //import Mongoose Database CODE
 var database = require('./public/javascripts/database');
 
-mongoose.connect('mongodb://localhost/projectDB');
+// mongoose.connect('mongodb://localhost/projectDB');
 // mongoose.connect('mongodb://heroku_13wmh570:fogerty21@ds147377.mlab.com:47377/heroku_13wmh570');
 
 app.use(cookieParser());
