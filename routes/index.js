@@ -4,7 +4,9 @@ var Account = require('../models/account');
 var router = express.Router();
 var database = require('../models/database');
 var mongoose = require('mongoose');
+var cors = require('cors');
 
+router.use(cors());
 
 
 router.get('/', function (req, res) {
