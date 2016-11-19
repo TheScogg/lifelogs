@@ -47,6 +47,8 @@ passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
 mongoose.connect("mongodb://TheScogg:fogerty21@ds147377.mlab.com:47377/lifelogs");
+// mongoose.connect("mongodb://heroku_hbnvgvbj:fogerty21@ds157677.mlab.com:57677/heroku_hbnvgvbj");
+
 // mongoose.createConnection("mongodb://TheScogg:fogerty21@ds151127.mlab.com:51127/accounts");
 
 // catch 404 and forward to error handler
