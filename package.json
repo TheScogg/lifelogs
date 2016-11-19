@@ -1,6 +1,6 @@
 {
-  "name": "passport-local-express4",
-  "version": "0.0.0",
+  "name": "lifelogs",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mjhea0/passport-local-express4.git"
+    "url": "git+ssh://git@github.com/mjhea0/passport-local-express4.git"
   },
   "author": "Michael Herman <michael@mherman.org>",
   "license": "MIT",
@@ -34,5 +34,14 @@
   },
   "devDependencies": {
     "angular": "^1.5.8"
+  },
+  "description": "A tool to help you keep track of what you do and how you feel.",
+  "bugs": {
+    "url": "https://github.com/mjhea0/passport-local-express4/issues"
+  },
+  "homepage": "https://github.com/mjhea0/passport-local-express4#readme",
+  "main": "./bin/www",
+  "directories": {
+    "test": "test"
   }
 }
