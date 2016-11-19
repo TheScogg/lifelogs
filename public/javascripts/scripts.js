@@ -1,7 +1,7 @@
 //Loads HTML, CSS, etc. before proceeding with Javascript
 $(document).ready(function () {
     // Load initial database data (document: username) & passto chartJS chart
-    var getData = function () {$.get("https://lifelogs.herokuapp.com/db/", function(data, textStatus, jqXHR) {
+    var getData = function () {$.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
         chart(data);
         chart2(data);
     })};
@@ -25,7 +25,7 @@ $(document).ready(function () {
     /* Allow user to view & modify activities selected on other days */
     function loadDate (selectedDate) {
         // Get all db data, then search for specific selected day.
-        $.get("https://lifelogs.herokuapp.com/db/", function(data, textStatus, jqXHR) {
+        $.get("http://localhost:3000/db/", function(data, textStatus, jqXHR) {
             var unselectedActivities = [];
             var selectedActivities = [];
             var selectedSurvey = [];
@@ -205,7 +205,7 @@ $(document).ready(function () {
 
     //Draw Chart with data from myDay object
     function chart (data) {
-        //chartJS : httpss://www.chartjs.org/docs/#line-chart
+        //chartJS : http://www.chartjs.org/docs/#line-chart
         var activities = getActivities(data);
 
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -249,7 +249,7 @@ $(document).ready(function () {
 
 
     function chart2 (data) {
-        //chartJS : httpss://www.chartjs.org/docs/#line-chart
+        //chartJS : http://www.chartjs.org/docs/#line-chart
         var activities = getActivities(data);
 
         var ctx = document.getElementById('myChart2').getContext('2d');
@@ -326,7 +326,7 @@ $(document).ready(function () {
         //Sends a post request to app.post code in routes/index.js
         function post() {
             var posting = $.ajax({
-              url: "https://lifelogs.herokuapp.com/db/",
+              url: "http://localhost:3000/db/",
               // async: false,
               crossOrigin: true,
               type: "POST",
