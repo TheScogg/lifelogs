@@ -115,9 +115,10 @@ $(document).ready(function () {
 
         // Cycle through activity array and display to page as bootstrap buttons
         for (var i = 0; i < activities.length; i++) {
-                var randColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+                // Generate random color, pastel
+                var color =  '#'+Math.floor(Math.random()*16777215).toString(16);
                 $activityHTML +=
-                ('<button type="button" class="btn btn-warning style=" style="color:black;background-color:' + randColor
+                ('<button type="button" class="btn btn-warning style=" style="color:black;background-color:' + color
                   + '">' + activities[i] + '</button>')
         }
 
@@ -392,6 +393,13 @@ $(document).ready(function () {
     $(document).on('click', "#activities button", function () {
         $(this).parent().siblings().append(this);
     });
+
+    //When #helpButton button is clicked, display #instructionText div
+    $("#helpButton").click('on', function () {
+        $("#instructionsText").toggle();
+    })
+
+
 
 
 });

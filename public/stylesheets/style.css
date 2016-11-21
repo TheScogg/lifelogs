@@ -128,6 +128,41 @@ p {
     font-size: 60px;
     font-family: 'Quicksand', sans-serif;
 }
+
+/*====================
+INDEX.HTML HELP Text
+=====================*/
+#instructions {
+    background-image: url("../images/darkGreenBG.jpg");
+    background-size: cover;
+    border: 3px solid gold;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.helpButton span {
+    color: white;
+    font-family: 'Dosis', sans-serif;
+    display: inline;
+    margin-right: 10px;
+}
+
+#instructionsText {
+    display: none;
+    text-align: justify;
+    background: transparent;
+    padding-bottom: 10px;
+}
+
+#instructionsText span {
+    font-family: 'Oswald', sans-serif;
+    color: gold;
+}
+
+#helpButton {
+    margin-top: 12px;
+}
+
 /*====================
 CONTACT PAGE
 =====================*/

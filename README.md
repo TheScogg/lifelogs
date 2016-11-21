@@ -31,7 +31,7 @@ Future Ambitions...
 
 Feedback on Project from Mentor...
 * Add specific instructions for users running app locally - STATUS : COMPLETED
-* Standardize the random button colors to avoid dark background with dark text. - STATUS : NOT COMPLETED
+* Standardize the random button colors to avoid dark background with dark text. - STATUS : COMPLETED
 * More on-screen help to clarify directions, and what the charts represent - STATUS : NOT COMPLETED
 
 Thank you for reading, and thank you for your interest in the project.
