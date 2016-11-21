@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Welcome to lifeLogs!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
@@ -51,7 +52,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div id="instructions" class="col-md-8 bgBox col-centered">
+            <div id="instructions" class="col-md-8 col-xs-10 bgBox col-centered">
 
                 <!-- <button type="button" id="helpButton" class="btn btn-warning btn-lg">
                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Click Me for Help
@@ -115,24 +116,29 @@
                     Are you sad? Do you feel like jumping for joy or crawling into a corner?</span>
                 </div>
                 <div id="surveys">
-                    <label for="mental" class="surveyBox">Mental</label>
-                    <select name="mental" id="mental">
-                        <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
-                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-                    </select>
+                    <!-- <div class="surveyButton"> -->
+                        <label for="mental" class="surveyBox">Mental</label>
+                        <select name="mental" id="mental">
+                            <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
+                            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                        </select>
+                    <!-- </div> -->
 
+                    <!-- <div class="surveyButton"> -->
                     <label for="physical" class="surveyBox">Physical</label>
                     <select name="physical" id="physical">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
+                  <!-- </div> -->
 
+                    <!-- <div class="surveyButton"> -->
                     <label for="psychological" class="surveyBox">Psychological</label>
                     <select name="psychological" id="psychological">
                         <option>1</option><option>2</option><option>3</option><option>4</option><option selected="selected">5</option>
                         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                     </select>
-
+                  <!-- </div> -->
 
                     <input type="submit" value="Click to Submit" id="submit" class="btn btn-warning pull-right">
 
